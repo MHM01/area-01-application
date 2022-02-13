@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20220213014100",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "groupe",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Groupe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "participant",
+      "otherEntityRelationshipName": "groupe",
+      "relationshipName": "participant",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

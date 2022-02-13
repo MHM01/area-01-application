@@ -1,0 +1,24 @@
+{
+  "area01ApplicationApp": {
+    "faculte": {
+      "home": {
+        "title": "Facultes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Faculte",
+        "createOrEditLabel": "Créer ou éditer un Faculte",
+        "notFound": "Aucun Faculte trouvé"
+      },
+      "created": "Un nouveau Faculte a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Faculte avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Faculte avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Faculte {{ id }} ?"
+      },
+      "detail": {
+        "title": "Faculte"
+      },
+      "id": "ID",
+      "nom": "Nom"
+    }
+  }
+}

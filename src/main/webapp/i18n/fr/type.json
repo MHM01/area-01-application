@@ -1,0 +1,9 @@
+{
+  "area01ApplicationApp": {
+    "Type": {
+      "null": "",
+      "COMPETITEUR": "COMPETITEUR",
+      "VISITEUR": "VISITEUR"
+    }
+  }
+}

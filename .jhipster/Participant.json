@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20220213014057",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "participant",
+  "fields": [
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "javadoc": "The firstname attribute."
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDeNaissance",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "cin",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Employee entity.",
+  "jpaMetamodelFiltering": false,
+  "name": "Participant",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "inscription",
+      "otherEntityRelationshipName": "participant",
+      "ownerSide": true,
+      "relationshipName": "inscription",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "faculte",
+      "otherEntityRelationshipName": "participant",
+      "ownerSide": true,
+      "relationshipName": "faculte",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "groupe",
+      "otherEntityRelationshipName": "participant",
+      "relationshipName": "groupe",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
