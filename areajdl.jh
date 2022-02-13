@@ -56,7 +56,7 @@ entity Groupe {
 }
 
 relationship OneToMany {
-	Groupe to Participant
+	Groupe to Participant{groupe}
 }
 
 // Set pagination options
