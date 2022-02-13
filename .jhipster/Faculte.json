@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20220213014059",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "faculte",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Faculte",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

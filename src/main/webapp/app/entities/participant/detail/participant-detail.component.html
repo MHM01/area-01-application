@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="participant">
+      <h2 data-cy="participantDetailsHeading"><span jhiTranslate="area01ApplicationApp.participant.detail.title">Participant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ participant.id }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="area01ApplicationApp.participant.prenom"
+            [ngbTooltip]="'area01ApplicationApp.participant.help.prenom' | translate"
+            >Prenom</span
+          >
+        </dt>
+        <dd>
+          <span>{{ participant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ participant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.email">Email</span></dt>
+        <dd>
+          <span>{{ participant.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.password">Password</span></dt>
+        <dd>
+          <span>{{ participant.password }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ participant.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.dateDeNaissance">Date De Naissance</span></dt>
+        <dd>
+          <span>{{ participant.dateDeNaissance | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.sexe">Sexe</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'area01ApplicationApp.Sexe.' + participant.sexe }}">{{ participant.sexe }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.cin">Cin</span></dt>
+        <dd>
+          <span>{{ participant.cin }}</span>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.inscription">Inscription</span></dt>
+        <dd>
+          <div *ngIf="participant.inscription">
+            <a [routerLink]="['/inscription', participant.inscription?.id, 'view']">{{ participant.inscription?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.faculte">Faculte</span></dt>
+        <dd>
+          <div *ngIf="participant.faculte">
+            <a [routerLink]="['/faculte', participant.faculte?.id, 'view']">{{ participant.faculte?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="area01ApplicationApp.participant.groupe">Groupe</span></dt>
+        <dd>
+          <div *ngIf="participant.groupe">
+            <a [routerLink]="['/groupe', participant.groupe?.id, 'view']">{{ participant.groupe?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/participant', participant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-participant-heading"
+        data-cy="ParticipantCreateUpdateHeading"
+        jhiTranslate="area01ApplicationApp.participant.home.createOrEditLabel"
+      >
+        Create or edit a Participant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="area01ApplicationApp.participant.prenom"
+            for="field_prenom"
+            [ngbTooltip]="'area01ApplicationApp.participant.help.prenom' | translate"
+            >Prenom</label
+          >
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.password" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.telephone" for="field_telephone"
+            >Telephone</label
+          >
+          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.dateDeNaissance" for="field_dateDeNaissance"
+            >Date De Naissance</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateDeNaissance"
+              data-cy="dateDeNaissance"
+              type="datetime-local"
+              class="form-control"
+              name="dateDeNaissance"
+              formControlName="dateDeNaissance"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.sexe" for="field_sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null">{{ 'area01ApplicationApp.Sexe.null' | translate }}</option>
+            <option *ngFor="let sexe of sexeValues" [value]="sexe">{{ 'area01ApplicationApp.Sexe.' + sexe | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.cin" for="field_cin">Cin</label>
+          <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.inscription" for="field_inscription"
+            >Inscription</label
+          >
+          <select class="form-control" id="field_inscription" data-cy="inscription" name="inscription" formControlName="inscription">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                inscriptionOption.id === editForm.get('inscription')!.value?.id ? editForm.get('inscription')!.value : inscriptionOption
+              "
+              *ngFor="let inscriptionOption of inscriptionsCollection; trackBy: trackInscriptionById"
+            >
+              {{ inscriptionOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.faculte" for="field_faculte">Faculte</label>
+          <select class="form-control" id="field_faculte" data-cy="faculte" name="faculte" formControlName="faculte">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="faculteOption.id === editForm.get('faculte')!.value?.id ? editForm.get('faculte')!.value : faculteOption"
+              *ngFor="let faculteOption of facultesCollection; trackBy: trackFaculteById"
+            >
+              {{ faculteOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="area01ApplicationApp.participant.groupe" for="field_groupe">Groupe</label>
+          <select class="form-control" id="field_groupe" data-cy="groupe" name="groupe" formControlName="groupe">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="groupeOption.id === editForm.get('groupe')!.value?.id ? editForm.get('groupe')!.value : groupeOption"
+              *ngFor="let groupeOption of groupesSharedCollection; trackBy: trackGroupeById"
+            >
+              {{ groupeOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
