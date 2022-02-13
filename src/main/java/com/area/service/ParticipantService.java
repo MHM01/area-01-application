@@ -1,6 +1,9 @@
 package com.area.service;
 
 import com.area.domain.Participant;
+import com.area.domain.User;
+import com.area.service.dto.AdminUserDTO;
+import com.area.web.rest.vm.ParticipantVM;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +50,6 @@ public interface ParticipantService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Participant registerParticipant(ParticipantVM userDTO, String password);
 }

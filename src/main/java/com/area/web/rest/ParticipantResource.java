@@ -1,14 +1,22 @@
 package com.area.web.rest;
 
 import com.area.domain.Participant;
+import com.area.domain.User;
 import com.area.repository.ParticipantRepository;
 import com.area.service.ParticipantService;
+import com.area.uti.Utility;
 import com.area.web.rest.errors.BadRequestAlertException;
+import com.area.web.rest.errors.EmailAlreadyUsedException;
+import com.area.web.rest.errors.InvalidPasswordException;
+import com.area.web.rest.errors.LoginAlreadyUsedException;
+import com.area.web.rest.vm.ManagedUserVM;
+import com.area.web.rest.vm.ParticipantVM;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +52,24 @@ public class ParticipantResource {
     public ParticipantResource(ParticipantService participantService, ParticipantRepository participantRepository) {
         this.participantService = participantService;
         this.participantRepository = participantRepository;
+    }
+
+    /**
+     * {@code POST  /register} : register the user.
+     *
+     * @param participantVM the managed user View Model.
+     * @throws InvalidPasswordException {@code 400 (Bad Request)} if the password is incorrect.
+     * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
+     * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
+     */
+    @PostMapping("/participants/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerParticipant(@Valid @RequestBody ParticipantVM participantVM) {
+        if (Utility.isPasswordLengthInvalid(participantVM.getPassword())) {
+            throw new InvalidPasswordException();
+        }
+        Participant participant = participantService.registerParticipant(participantVM, participantVM.getPassword());
+        //        mailService.sendActivationEmail(participant);
     }
 
     /**

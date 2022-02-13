@@ -1,11 +1,16 @@
 package com.area.domain;
 
+import com.area.config.Constants;
 import com.area.domain.enumeration.Sexe;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -25,6 +30,9 @@ public class Participant implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "cin")
+    private String cin;
 
     /**
      * The firstname attribute.
@@ -46,24 +54,21 @@ public class Participant implements Serializable {
     private String telephone;
 
     @Column(name = "date_de_naissance")
-    private Instant dateDeNaissance;
+    private Date dateDeNaissance;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sexe")
     private Sexe sexe;
 
-    @Column(name = "cin")
-    private String cin;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Inscription inscription;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Faculte faculte;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "participants" }, allowSetters = true)
     private Groupe groupe;
 
@@ -147,16 +152,11 @@ public class Participant implements Serializable {
         this.telephone = telephone;
     }
 
-    public Instant getDateDeNaissance() {
+    public Date getDateDeNaissance() {
         return this.dateDeNaissance;
     }
 
-    public Participant dateDeNaissance(Instant dateDeNaissance) {
-        this.setDateDeNaissance(dateDeNaissance);
-        return this;
-    }
-
-    public void setDateDeNaissance(Instant dateDeNaissance) {
+    public void setDateDeNaissance(Date dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
     }
 
